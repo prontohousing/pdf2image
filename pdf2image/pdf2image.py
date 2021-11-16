@@ -10,10 +10,12 @@ import types
 import shutil
 import pathlib
 import subprocess
+import PIL
 from subprocess import Popen, PIPE, TimeoutExpired
 from PIL import Image
 
 Image.MAX_IMAGE_PIXELS = None
+PIL.Image.MAX_IMAGE_PIXELS = None
 
 from .generators import uuid_generator, counter_generator, ThreadSafeGenerator
 
@@ -529,6 +531,8 @@ def _load_from_output_folder(
             if paths_only:
                 images.append(os.path.join(output_folder, f))
             else:
+                Image.MAX_IMAGE_PIXELS = None
+                PIL.Image.MAX_IMAGE_PIXELS = None
                 images.append(Image.open(os.path.join(output_folder, f)))
                 if in_memory:
                     images[-1].load()
