@@ -13,6 +13,8 @@ import subprocess
 from subprocess import Popen, PIPE, TimeoutExpired
 from PIL import Image
 
+Image.MAX_IMAGE_PIXELS = None
+
 from .generators import uuid_generator, counter_generator, ThreadSafeGenerator
 
 from .parsers import (
